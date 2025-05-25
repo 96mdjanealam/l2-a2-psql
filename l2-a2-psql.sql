@@ -55,7 +55,7 @@ VALUES (
     ),
     (
         'Bengal Tiger',
-        'Panthera tigris tigris',
+        'Panthera tigris',
         '1758-01-01',
         'Endangered'
     ),
@@ -163,6 +163,13 @@ GROUP BY
     r.name;
 
 -- problem 5
+SELECT sp.common_name
+FROM species sp
+    LEFT JOIN sightings s ON sp.species_id = s.species_id
+WHERE
+    s.sighting_id IS NULL;
+
+-- problem 6
 SELECT sp.common_name, s.sighting_time, r.name
 FROM
     sightings s
@@ -170,6 +177,33 @@ FROM
     JOIN species sp ON s.species_id = sp.species_id
 ORDER BY s.sighting_time DESC
 LIMIT 2;
+
+-- problem 7
+UPDATE species
+SET
+    conservation_status = 'Historic'
+WHERE
+    discovery_date < DATE '1800-01-01';
+
+-- problem - 8
+SELECT
+    sighting_id,
+    CASE
+        WHEN DATE_PART('hour', sighting_time) < 12 THEN 'Morning'
+        WHEN DATE_PART('hour', sighting_time) BETWEEN 12 AND 16  THEN 'Afternoon'
+        ELSE 'Evening'
+    END AS time_of_day
+FROM sightings;
+
+-- problem 9
+DELETE FROM rangers r
+WHERE NOT EXISTS (
+  SELECT *
+  FROM sightings s
+  WHERE s.ranger_id = r.ranger_id
+);
+
+
 
 SELECT * FROM rangers;
 
