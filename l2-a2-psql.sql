@@ -1,5 +1,3 @@
--- Active: 1747562274603@@127.0.0.1@5432@conservation_db
--- Active: 1747562274603@@127.0.0.1@5432@postgres
 CREATE DATABASE conservation_db;
 
 CREATE TABLE rangers (
@@ -22,7 +20,7 @@ CREATE TABLE sightings (
     species_id INT REFERENCES species (species_id) ON DELETE SET NULL,
     sighting_time TIMESTAMP,
     location VARCHAR(50),
-    note TEXT
+    notes TEXT
 );
 
 INSERT INTO
@@ -156,8 +154,25 @@ FROM sightings;
 -- problem 3
 SELECT * FROM sightings WHERE location ILIKE '%Pass%';
 
+-- problem 4
+SELECT r.name AS name, count(s.ranger_id) AS total_sightings
+FROM sightings s
+    JOIN rangers r ON s.ranger_id = r.ranger_id
+GROUP BY
+    s.ranger_id,
+    r.name;
+
+-- problem 5
+SELECT sp.common_name, s.sighting_time, r.name
+FROM
+    sightings s
+    JOIN rangers r ON s.ranger_id = r.ranger_id
+    JOIN species sp ON s.species_id = sp.species_id
+ORDER BY s.sighting_time DESC
+LIMIT 2;
+
+SELECT * FROM rangers;
+
 SELECT * FROM species;
 
 SELECT * FROM sightings;
-
-SELECT * FROM rangers;
