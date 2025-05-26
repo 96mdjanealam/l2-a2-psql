@@ -1,3 +1,4 @@
+-- Active: 1748242321566@@127.0.0.1@5432@conservation_db
 CREATE DATABASE conservation_db;
 
 CREATE TABLE rangers (
@@ -33,12 +34,8 @@ VALUES (
     (
         'Carol King',
         'Mountain Range'
-    ),
-    (
-        'David Black',
-        'Coastal Plains'
-    ),
-    ('Eva Brown', 'Desert Edge');
+    );
+   
 
 INSERT INTO
     species (
@@ -70,18 +67,6 @@ VALUES (
         'Elephas maximus indicus',
         '1758-01-01',
         'Endangered'
-    ),
-    (
-        'Golden Langur',
-        'Trachypithecus geei',
-        '1953-01-01',
-        'Endangered'
-    ),
-    (
-        'Indian Pangolin',
-        'Manis crassicaudata',
-        '1822-01-01',
-        'Near Threatened'
     );
 
 INSERT INTO
@@ -124,22 +109,6 @@ VALUES (
         'Snowfall Pass',
         '2024-05-18 18:30:00',
         NULL
-    ),
-    (
-        5,
-        2,
-        1,
-        'Crystal Creek',
-        '2024-05-20 06:50:00',
-        'Tracks found near water'
-    ),
-    (
-        6,
-        3,
-        2,
-        'Misty Hollow',
-        '2024-05-22 14:15:00',
-        'Group resting under trees'
     );
 
 -- problem 1
